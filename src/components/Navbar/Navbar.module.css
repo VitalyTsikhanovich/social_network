@@ -1,0 +1,26 @@
+
+.nav{
+    /*margin-top: 15px;*/
+    grid-area: nav;
+    background-color: #dbdbd3;
+    /*margin-right: 15px;*/
+    height: 500px;
+    padding: 20px;
+}
+
+.item a {
+    text-decoration: none;
+    color: #222020;
+    font-size: 30px;
+    font-family: 'Lato', sans-serif;
+}
+
+.item{
+    /*padding: 20px;*/
+    color: #ffffff;
+}
+
+.item a.active{
+    color: #696565;
+    border-bottom: 2px solid #6a6a6e;
+}
