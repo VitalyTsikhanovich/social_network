@@ -1,15 +1,23 @@
 import s from './MyPosts.module.css'
 import React from "react";
 import Post from "./Post/Post";
+import {Simulate} from "react-dom/test-utils";
 
 
-let postData =[
-    {id:1, message:'Кто ты?', countsLike:4},
-    {id:1, message:'Зачем', countsLike:54}
-]
+export type PostsType = {
+    id: number
+    message: string
+    countsLike: number
+}
 
-function MyPosts() {
+export type PropsArray = {
+    posts: Array<PostsType>
+}
 
+
+function MyPosts(props: PropsArray) {
+    // debugger
+    let postsElement = props.posts.map(p => <Post message={p.message} countsLike={p.countsLike}/>)
     return (
         <div>
             <div>
@@ -19,8 +27,7 @@ function MyPosts() {
             <button>Add post</button>
 
             <div className={s.posts}>
-                <Post message={postData[0].message} countsLike={postData[0].countsLike}/>
-                <Post message={postData[1].message} countsLike={postData[1].countsLike}/>
+                {postsElement}
             </div>
         </div>
     )

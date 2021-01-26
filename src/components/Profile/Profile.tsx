@@ -1,14 +1,15 @@
 import React from "react";
 import s from './Profile.module.css'
-import MyPosts from "./MyPosts/MyPosts";
+import MyPosts, {PropsArray} from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-function Profile() {
-
+function Profile(props: PropsArray) {
+    // console.log(props)
+// debugger
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts posts={props.posts}/>
         </div>
     )
 }
