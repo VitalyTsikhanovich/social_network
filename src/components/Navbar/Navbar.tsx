@@ -20,6 +20,9 @@ function Navbar (){
             <div className={s.item}>
                 <NavLink to="/setting" activeClassName={s.active}>Setting</NavLink>
             </div>
+            <div className={s.item}>
+                <NavLink to="/sidebar" activeClassName={s.active}>Sidebar</NavLink>
+            </div>
 
         </nav>
     )

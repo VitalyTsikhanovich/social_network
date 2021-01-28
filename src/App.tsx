@@ -9,11 +9,18 @@ import Music from "./components/Music/Music"
 import {BrowserRouter,Switch, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Setting from "./components/Setting/Setting";
-import {PostsType, PropsArray} from "./components/Profile/MyPosts/MyPosts";
-import state from "./redux/state";
+import state, { RootStateProps } from "./redux/state";
+import Sidebar from "./components/Sidebar/Sidebar";
 
+type AppPropsType={
+  // posts: Array<PostsType>
+  // messages: Array<MessagePropsType>
+  // dialogs:Array<DialogsPropsType>
+state: RootStateProps
+  addPost: (postText:string)=>void
+}
 
-function App() {
+function App(props: AppPropsType) {
   // debugger
 
   return (
@@ -25,11 +32,12 @@ function App() {
 
           <div className={'app-wrapper-content'}>
             <Switch>
-            <Route path='/profile' render={ ()=> <Profile posts={state.profilePage.posts}/>} />
-            <Route path='/dialogs' render={ ()=> <Dialogs dialogs={state.dialogPage.dialogs} messages={state.dialogPage.messages}/>} />
+            <Route path='/profile' render={ ()=> <Profile state={props.state.profilePage} addPost={props.addPost}/>} />
+            <Route path='/dialogs' render={ ()=> <Dialogs state={props.state.dialogPage} />} />
             <Route path='/music' render={()=> <Music/>}/>
             <Route path='/news' render={()=> <News/>}/>
             <Route path='/setting' render={()=> <Setting/>}/>
+            <Route path='/sidebar' render={()=> <Sidebar/>}/>
             </Switch>
           </div>
         </div>

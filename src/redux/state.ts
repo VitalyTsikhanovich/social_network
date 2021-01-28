@@ -1,43 +1,46 @@
-type PostType = {
+import {renderTree} from "../render";
+
+export type PostType = {
     id: number
     message: string
     countsLike: number
 }
 
 
-type DialogType = {
+export type DialogType = {
     id: number
     name: string
 }
 
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
 
-type ProfilePageType={
+export type ProfilePageType={
     posts: Array<PostType>
+
 }
 
-type DialogPageType={
+export type DialogPageType={
     dialogs: Array<DialogType>
     messages: Array<MessageType>
 }
+type SidebarType ={}
 
-type RootStateType={
+export type RootStateProps ={
     profilePage: ProfilePageType
     dialogPage: DialogPageType
+    sidebar: SidebarType
 }
 
 
-let state: RootStateType = {
+let state: RootStateProps = {
     profilePage: {
         posts: [
             {id: 1, message: 'Кто ты?', countsLike: 4},
             {id: 1, message: 'Зачем', countsLike: 54},
-            {id: 1, message: 'Зачем', countsLike: 54},
-            {id: 1, message: 'Зачем', countsLike: 54},
-            {id: 1, message: 'Зачем', countsLike: 54},
+
         ]
     },
    dialogPage: {
@@ -52,8 +55,19 @@ let state: RootStateType = {
             {id: 1, message: 'Y'},
             {id: 1, message: 'Как дела'}
         ]
-    }
+    },
+    sidebar: {},
+
 
 }
+export let addPost = (postText: string)=>{
+    const newPost: PostType = {
+        id: new Date().getTime(),
+        message: postText,
+        countsLike: 0
+    }
 
+    state.profilePage.posts.push(newPost)
+    renderTree(state)
+}
 export default state
