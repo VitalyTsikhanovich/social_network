@@ -13,11 +13,13 @@ export type DialogType = {
 }
 
 export type MessageType = {
+
     id: number
     message: string
 }
 
 export type ProfilePageType={
+    newPostText: string
     posts: Array<PostType>
 
 }
@@ -32,11 +34,13 @@ export type RootStateProps ={
     profilePage: ProfilePageType
     dialogPage: DialogPageType
     sidebar: SidebarType
+
 }
 
 
 let state: RootStateProps = {
     profilePage: {
+        newPostText: "ffff ",
         posts: [
             {id: 1, message: 'Кто ты?', countsLike: 4},
             {id: 1, message: 'Зачем', countsLike: 54},
@@ -60,14 +64,20 @@ let state: RootStateProps = {
 
 
 }
-export let addPost = (postText: string)=>{
+export let addPost = ()=>{
     const newPost: PostType = {
         id: new Date().getTime(),
-        message: postText,
+        message: state.profilePage.newPostText,
         countsLike: 0
     }
 
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText=''
+    renderTree(state)
+}
+
+export const changeNewText = (newText: string) =>{
+    state.profilePage.newPostText = newText
     renderTree(state)
 }
 export default state

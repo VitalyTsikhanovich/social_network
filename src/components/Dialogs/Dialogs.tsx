@@ -22,7 +22,7 @@ export type Props={
 
 
 function Dialogs(props: Props) {
-    debugger
+    // debugger
     let dialogElement =props.state.dialogs.map(d=><DialogItem name={d.name} id={d.id}/>)
     let messagesElement = props.state.messages.map(m=><Message message={m.message}/>)
 

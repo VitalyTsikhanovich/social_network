@@ -9,17 +9,18 @@ import Music from "./components/Music/Music"
 import {BrowserRouter,Switch, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Setting from "./components/Setting/Setting";
-import state, { RootStateProps } from "./redux/state";
+import state, {changeNewText, RootStateProps} from "./redux/state";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 type AppPropsType={
   // posts: Array<PostsType>
   // messages: Array<MessagePropsType>
   // dialogs:Array<DialogsPropsType>
-state: RootStateProps
-  addPost: (postText:string)=>void
-}
+  changeNewText: (newText: string)=> void
 
+state: RootStateProps
+  addPost: ()=>void
+}
 function App(props: AppPropsType) {
   // debugger
 
@@ -32,7 +33,9 @@ function App(props: AppPropsType) {
 
           <div className={'app-wrapper-content'}>
             <Switch>
-            <Route path='/profile' render={ ()=> <Profile state={props.state.profilePage} addPost={props.addPost}/>} />
+            <Route path='/profile' render={ ()=> <Profile state={props.state.profilePage}
+                                                          addPost={props.addPost}
+                                                          changeUpdateText={props.changeNewText}/>} />
             <Route path='/dialogs' render={ ()=> <Dialogs state={props.state.dialogPage} />} />
             <Route path='/music' render={()=> <Music/>}/>
             <Route path='/news' render={()=> <News/>}/>
