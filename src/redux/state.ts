@@ -1,5 +1,9 @@
 // import {renderTree} from "../render";
 
+import profileReducer, {addPostAC, newTextChangeHandlerAC} from "./profile-reducer";
+import dialogsReducer, {newMessageBodyAC, sendMessageAC} from "./dialogs-reducer";
+
+
 export type StoreType = {
     _state: RootStateProps
     addPost: () => void
@@ -8,9 +12,14 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     getState: () => RootStateProps
     dispatch: (action: ActionsType) => void
+
 }
 
-export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof newTextChangeHandlerAC>
+export type ActionsType =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof newTextChangeHandlerAC>
+    | ReturnType<typeof newMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
 
 
 // type AddPostActionType = {
@@ -26,10 +35,14 @@ export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof newTe
 //
 // type ChangeNewTextType = ReturnType<typeof newTextChangeHandlerAC>
 
+// type NewMessageBodyType = ReturnType<typeof newMessageBodyAC>
+// 'NEW-MESSAGE-BODY'
+
+
 let store: StoreType = {
     _state: {
         profilePage: {
-            newPostText: "ffff ",
+            newPostText: "Hi ",
             posts: [
                 {id: 1, message: 'Кто ты?', countsLike: 4},
                 {id: 1, message: 'Зачем', countsLike: 54},
@@ -47,7 +60,8 @@ let store: StoreType = {
                 {id: 1, message: 'Привет'},
                 {id: 1, message: 'Y'},
                 {id: 1, message: 'Как дела'}
-            ]
+            ],
+            newMessageBody: ''
         },
         sidebar: {},
 
@@ -78,21 +92,32 @@ let store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        debugger
-        if (action.type === 'ADD-POST') {
-            const newPost: PostType = {
-                id: new Date().getTime(),
-                message: this._state.profilePage.newPostText,
-                countsLike: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._renderTree()
-        } else if (action.type === 'CHANGE-NEW-TEXT') {
-            debugger
-            this._state.profilePage.newPostText = action.newText
-            this._renderTree()
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage , action)
+        this._state.dialogPage =  dialogsReducer(this._state.dialogPage, action)
+        // this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+this._renderTree()
+        // if (action.type === 'ADD-POST') {
+        //     const newPost: PostType = {
+        //         id: new Date().getTime(),
+        //         message: this._state.profilePage.newPostText,
+        //         countsLike: 0
+        //     }
+        //     this._state.profilePage.posts.push(newPost)
+        //     this._state.profilePage.newPostText = ''
+        //     this._renderTree()
+        // } else if (action.type === 'CHANGE-NEW-TEXT') {
+        //     this._state.profilePage.newPostText = action.newText
+        //     this._renderTree()
+        // } else if (action.type === 'NEW-MESSAGE-BODY') {
+        //     this._state.dialogPage.newMessageBody = action.body
+        //     this._renderTree()
+        // } else if (action.type === 'SEND-MESSAGE') {
+        //     let body = this._state.dialogPage.newMessageBody
+        //
+        //     this._state.dialogPage.messages.push({id: 6, message: body})
+        //      this._state.dialogPage.newMessageBody = ''
+        //     this._renderTree()
+        // }
     }
 }
 
@@ -103,20 +128,33 @@ let store: StoreType = {
 // export const subscribe = (observer: () => void) => {
 //     renderTree = observer
 // }
+// export let sendMessageAC = () => {
+//     return {
+//         type: 'SEND-MESSAGE',
+//     } as const
+// }
 
-export let addPostAC= (newPostText: string)=>{
-    return{
-type: "ADD-POST",
-        newPostText: newPostText
-    } as const
-}
+// export let newMessageBodyAC = (body: string) => {
+//     return {
+//         type: 'NEW-MESSAGE-BODY',
+//         body: body
+//     } as const
+// }
 
-export let newTextChangeHandlerAC=(newText: string)=>{
-    return{
-        type: "CHANGE-NEW-TEXT",
-        newText: newText
-    } as const
-}
+
+// export let addPostAC = (newPostText: string) => {
+//     return {
+//         type: "ADD-POST",
+//         newPostText: newPostText
+//     } as const
+// }
+
+// export let newTextChangeHandlerAC = (value: string) => {
+//     return {
+//         type: "CHANGE-NEW-TEXT",
+//         newText: value
+//     } as const
+// }
 
 export type PostType = {
     id: number
@@ -144,6 +182,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageBody: string
 }
 type SidebarType = {}
 
@@ -151,6 +190,7 @@ export type RootStateProps = {
     profilePage: ProfilePageType
     dialogPage: DialogPageType
     sidebar: SidebarType
+    // newMessageBody: string
 
 }
 
