@@ -1,10 +1,9 @@
-import {NavLink} from 'react-router-dom'
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {ActionsType, DialogPageType, RootStateProps} from "../../redux/state";
+import {DialogPageType} from "../../redux/store";
 import React, {ChangeEvent} from "react";
-import {newMessageBodyAC, sendMessageAC} from "../../redux/dialogs-reducer";
+
 
 export type DialogsPropsType = {
     name: string
@@ -16,25 +15,27 @@ export type MessagePropsType = {
 }
 
 export type Props = {
-    // dialogs: Array<DialogsPropsType>
-    //  messages: Array<MessagePropsType>
     dialogPage: DialogPageType
-    dispatch: (action: ActionsType) => void
+    onNewMessageChange: (body: string)=>void
+    onSendMessageClick: ()=> void
+
 }
 
 
 function Dialogs(props: Props) {
-    // debugger
-    let dialogElement = props.dialogPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElement = props.dialogPage.messages.map(m => <Message message={m.message}/>)
-    let newMessageBody = props.dialogPage.newMessageBody
+    let state = props.dialogPage
+    let dialogElement = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    let messagesElement = state.messages.map(m => <Message message={m.message}/>)
+    let newMessageBody = state.newMessageBody
 
     let onSendMessageClick = () => {
-        props.dispatch(sendMessageAC())
+        props.onSendMessageClick()
+        // props.dispatch(sendMessageAC())
     }
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value
-        props.dispatch(newMessageBodyAC(body))
+        props.onNewMessageChange(body)
+        // props.dispatch(newMessageBodyAC(body))
     }
 
     return (
@@ -46,12 +47,16 @@ function Dialogs(props: Props) {
             <div className={s.messages}>
                 <div> {messagesElement}</div>
                 <div>
-                    <div><textarea value={newMessageBody} onChange={onNewMessageChange} placeholder={'enter message'}></textarea></div>
-
-                    <div><button onClick={onSendMessageClick}>отправить</button></div>
+                    <div>
+                        <textarea value={newMessageBody}
+                                  onChange={onNewMessageChange}
+                                  placeholder={'enter message'}>
+                        </textarea>
+                    </div>
+                    <div>
+                        <button onClick={onSendMessageClick}>отправить</button>
+                    </div>
                 </div>
-
-
             </div>
         </div>
 

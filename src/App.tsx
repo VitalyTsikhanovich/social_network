@@ -9,8 +9,9 @@ import Music from "./components/Music/Music"
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Setting from "./components/Setting/Setting";
-import {ActionsType, RootStateProps, StoreType} from "./redux/state";
+import {ActionsType, RootStateProps, StoreType} from "./redux/store";
 import Sidebar from "./components/Sidebar/Sidebar";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     // posts: Array<PostsType>
@@ -18,9 +19,9 @@ type AppPropsType = {
     // // dialogs:Array<DialogsPropsType>
     // changeNewText: (newText: string) => void
     // store: StoreType
-    state: RootStateProps
+    // state: RootStateProps
     // addPost: () => void
-    dispatch: (action:ActionsType )=> void
+    // dispatch: (action: ActionsType) => void
 }
 
 function App(props: AppPropsType) {
@@ -36,9 +37,11 @@ function App(props: AppPropsType) {
                     <div className={'app-wrapper-content'}>
                         <Switch>
                             <Route path='/profile' render={() =>
-                                <Profile profilePage={props.state.profilePage} dispatch={props.dispatch} />}/>
+                                <Profile />}/>
+
                             <Route path='/dialogs' render={() =>
-                                <Dialogs dialogPage={props.state.dialogPage} dispatch={props.dispatch}/>}/>
+                                <DialogsContainer />}/>
+
                             <Route path='/music' render={() => <Music/>}/>
                             <Route path='/news' render={() => <News/>}/>
                             <Route path='/setting' render={() => <Setting/>}/>

@@ -1,25 +1,35 @@
-import {PostType, RootStateProps} from "./state";
+
 import {addPostAC, newTextChangeHandlerAC} from "./profile-reducer";
 
+export type DialogType = {
+    id: number
+    name: string
+}
 
-const initState = {
+export type MessageType = {
+    id: number
+    message: string
+}
+
+
+const initialState = {
     dialogs: [
         {id: 1, name: 'Иван'},
         {id: 2, name: 'Сергей'},
         {id: 3, name: 'Леша'},
         {id: 4, name: 'Маша'}
-    ],
+    ] as Array<DialogType>,
     messages: [
         {id: 1, message: 'Привет'},
         {id: 1, message: 'Y'},
         {id: 1, message: 'Как дела'}
-    ],
+    ] as Array<MessageType>,
     newMessageBody: ''
 }
 
-type InitStateType = typeof initState
+export type InitStateType = typeof initialState
 
-const dialogsReducer = (state: InitStateType = initState, action: ActionsType) => {
+const dialogsReducer = (state: InitStateType = initialState, action: ActionsType): InitStateType => {
 
     switch (action.type) {
         case 'NEW-MESSAGE-BODY':

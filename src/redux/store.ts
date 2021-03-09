@@ -2,6 +2,7 @@
 
 import profileReducer, {addPostAC, newTextChangeHandlerAC} from "./profile-reducer";
 import dialogsReducer, {newMessageBodyAC, sendMessageAC} from "./dialogs-reducer";
+// import sidebarReducer from "./sidebar-reducer";
 
 
 export type StoreType = {
@@ -39,7 +40,7 @@ export type ActionsType =
 // 'NEW-MESSAGE-BODY'
 
 
-let store: StoreType = {
+ let store: StoreType = {
     _state: {
         profilePage: {
             newPostText: "Hi ",
@@ -63,7 +64,7 @@ let store: StoreType = {
             ],
             newMessageBody: ''
         },
-        sidebar: {},
+        // sidebar: {},
 
 
     },
@@ -156,19 +157,18 @@ this._renderTree()
 //     } as const
 // }
 
-export type PostType = {
+ type PostType = {
     id: number
     message: string
     countsLike: number
 }
 
-
-export type DialogType = {
+ type DialogType = {
     id: number
     name: string
 }
 
-export type MessageType = {
+type MessageType = {
     id: number
     message: string
 }
@@ -184,13 +184,16 @@ export type DialogPageType = {
     messages: Array<MessageType>
     newMessageBody: string
 }
-type SidebarType = {}
+export type SidebarType={
+
+}
+
 
 export type RootStateProps = {
     profilePage: ProfilePageType
     dialogPage: DialogPageType
-    sidebar: SidebarType
-    // newMessageBody: string
+    // sidebar: SidebarType
+
 
 }
 

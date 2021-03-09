@@ -1,18 +1,23 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import store from "./redux/state";
-
-// import {addPost, changeNewText, RootStateProps} from "./redux/state";
 import ReactDOM from "react-dom";
-
 import App from "./App";
-import Profile from "./components/Profile/Profile";
+
+import store from "./redux/redux-store";
+import {Provider} from "react-redux";
+
+
 
 const renderTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App dispatch={store.dispatch.bind(store)}  state={store.getState()}/>
+            <Provider store={store}>
+
+                <App/>
+            </Provider>
+
+
             {/*<App state={store.getState()} addPost={store.addPost} changeNewText={store.changeNewText}/>*/}
 
 

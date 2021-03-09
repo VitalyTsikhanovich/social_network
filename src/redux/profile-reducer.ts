@@ -1,17 +1,24 @@
-import {PostType} from "./state";
+
 import {newMessageBodyAC, sendMessageAC} from "./dialogs-reducer";
 
-const initialState = {
+export type PostType = {
+    id: number
+    message: string
+    countsLike: number
+}
+
+export const initialState = {
     newPostText: "Hi ",
     posts: [
         {id: 1, message: 'Кто ты?', countsLike: 4},
         {id: 1, message: 'Зачем', countsLike: 54},
 
-    ]
+    ] as Array<PostType>
 }
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
-const profileReducer = (state: InitialStateType = initialState, action: ActionsType) => {
+
+const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'ADD-POST':
             const newPost: PostType = {
@@ -32,7 +39,7 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
 
 }
 
-export let addPostAC = (newPostText: string) => ({type: "ADD-POST", newPostText: newPostText} as const)
+export let addPostAC = () => ({type: "ADD-POST"} as const)
 
 export let newTextChangeHandlerAC = (value: string) => ({type: "CHANGE-NEW-TEXT", newText: value} as const)
 
