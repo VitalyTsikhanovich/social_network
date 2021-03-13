@@ -1,4 +1,3 @@
-
 import {addPostAC, newTextChangeHandlerAC} from "./profile-reducer";
 
 export type DialogType = {
@@ -30,17 +29,34 @@ const initialState = {
 export type InitStateType = typeof initialState
 
 const dialogsReducer = (state: InitStateType = initialState, action: ActionsType): InitStateType => {
-
+    // let stateCopy
     switch (action.type) {
         case 'NEW-MESSAGE-BODY':
-            state.newMessageBody = action.body
-            return state                                                 // break
+       return    {
+                ...state,
+                newMessageBody: action.body
+            }
+            // stateCopy.newMessageBody = action.body
+            // state.newMessageBody = action.body
+            // return stateCopy
+                                                   // break
         case 'SEND-MESSAGE':
-            let body = state.newMessageBody
 
-            state.messages.push({id: 6, message: body})
-            state.newMessageBody = ''
-            return state
+            let body = state.newMessageBody
+            // stateCopy=
+           return      {
+                ...state,
+                newMessageBody : '',
+                messages: [...state.messages, {id: 6, message: body}]                 //вместо push
+            }
+
+            // let stateCopy = {...state}
+            // stateCopy.messages = [...state.messages]
+            // stateCopy.messages.push({id: 6, message: body})
+            // stateCopy.newMessageBody = ''
+            // state.messages.push({id: 6, message: body})
+            // state.newMessageBody = ''
+            // return stateCopy
         default:
             return state
     }

@@ -1,4 +1,3 @@
-
 import {newMessageBodyAC, sendMessageAC} from "./dialogs-reducer";
 
 export type PostType = {
@@ -26,16 +25,28 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
                 message: state.newPostText,
                 countsLike: 0
             }
-
-            state.posts.push(newPost)
-            state.newPostText = ''
-            return state
-        case 'CHANGE-NEW-TEXT':
-            state.newPostText = action.newText
-            return state
+            return  {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText : ''
+            }
+// let stateCopy = {...state}
+// stateCopy.posts = [...state.posts]
+//             stateCopy.posts.push(newPost)
+//             stateCopy.newPostText = ''
+            // state.posts.push(newPost)
+            // state.newPostText = ''
+            // return stateCopy
+        case 'CHANGE-NEW-TEXT': {
+            return  {
+                ...state,
+                newPostText: action.newText
+            }
+        }
         default:
             return state
     }
+
 
 }
 

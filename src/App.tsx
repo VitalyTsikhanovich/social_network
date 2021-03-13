@@ -12,6 +12,7 @@ import Setting from "./components/Setting/Setting";
 import {ActionsType, RootStateProps, StoreType} from "./redux/store";
 import Sidebar from "./components/Sidebar/Sidebar";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 type AppPropsType = {
     // posts: Array<PostsType>
@@ -36,16 +37,14 @@ function App(props: AppPropsType) {
 
                     <div className={'app-wrapper-content'}>
                         <Switch>
-                            <Route path='/profile' render={() =>
-                                <Profile />}/>
+                            <Route path='/profile' render={() => <Profile />}/>
 
-                            <Route path='/dialogs' render={() =>
-                                <DialogsContainer />}/>
+                            <Route path='/dialogs' render={() => <DialogsContainer />}/>
 
                             <Route path='/music' render={() => <Music/>}/>
                             <Route path='/news' render={() => <News/>}/>
                             <Route path='/setting' render={() => <Setting/>}/>
-                            <Route path='/sidebar' render={() => <Sidebar/>}/>
+                            <Route path='/users' render={() => <UsersContainer/>}/>
                         </Switch>
                     </div>
                 </div>
