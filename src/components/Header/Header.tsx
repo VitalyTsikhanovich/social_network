@@ -1,10 +1,11 @@
 import s from  './Header.module.css'
+import logo from '../common/assets/img/Ghost.gif'
 
 
 function Header (){
     return(
         <div className={s.header}>
-            <img  src="https://miro.medium.com/max/855/0*Ui5MlPFZS4xYwTn2.jpg" alt="лого"/>
+            <img  src={logo} alt="logo"/>
         </div>
     )
 }
