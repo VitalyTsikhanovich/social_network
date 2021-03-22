@@ -1,11 +1,6 @@
-import s from './MyPosts.module.css'
 import React, {ChangeEvent} from "react";
-import Post from "./Post/Post";
-import {addPostAC, InitialStateType, newTextChangeHandlerAC, PostType} from "../../../redux/profile-reducer";
-import store, {ActionsType, RootStateProps, StoreType} from "../../../redux/store";
+import {addPostAC,  newTextChangeHandlerAC, PostType} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
-import {InitStateType, newMessageBodyAC, sendMessageAC} from "../../../redux/dialogs-reducer";
-
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";

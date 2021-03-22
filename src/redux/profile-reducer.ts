@@ -12,7 +12,8 @@ export const initialState = {
         {id: 1, message: 'Кто ты?', countsLike: 4},
         {id: 1, message: 'Зачем', countsLike: 54},
 
-    ] as Array<PostType>
+    ] as Array<PostType>,
+    profile: null
 }
 export type InitialStateType = typeof initialState
 
@@ -25,24 +26,28 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
                 message: state.newPostText,
                 countsLike: 0
             }
-            return  {
+            return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText : ''
+                newPostText: ''
             }
 // let stateCopy = {...state}
 // stateCopy.posts = [...state.posts]
 //             stateCopy.posts.push(newPost)
 //             stateCopy.newPostText = ''
-            // state.posts.push(newPost)
-            // state.newPostText = ''
-            // return stateCopy
+        // state.posts.push(newPost)
+        // state.newPostText = ''
+        // return stateCopy
         case 'CHANGE-NEW-TEXT': {
-            return  {
+            return {
                 ...state,
                 newPostText: action.newText
             }
         }
+        case "SET-USERS-PROFILE": {
+            return {...state, profile: action.profile}
+        }
+
         default:
             return state
     }
@@ -53,11 +58,12 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
 export let addPostAC = () => ({type: "ADD-POST"} as const)
 
 export let newTextChangeHandlerAC = (value: string) => ({type: "CHANGE-NEW-TEXT", newText: value} as const)
-
+export let setUsersProfile = (profile: null) => ({type: "SET-USERS-PROFILE", profile} as const)
 type ActionsType =
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof newTextChangeHandlerAC>
     | ReturnType<typeof newMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
+    | ReturnType<typeof setUsersProfile>
 
 export default profileReducer

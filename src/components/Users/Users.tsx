@@ -2,7 +2,7 @@ import React from "react";
 import style from "./Users.module.css";
 import userPhoto from "../common/assets/img/userPhoto.png";
 import {MapDispatchType, MapStatePropsType} from "./UsersContainer";
-
+import {NavLink} from 'react-router-dom';
 type UsersPropsType = MapStatePropsType & MapDispatchType & UsersAPITypeProps
 
 type UsersAPITypeProps={
@@ -28,7 +28,9 @@ let Users =(props: UsersPropsType)=>{
         props.users.map(u => <div key={u.id}>
         <span>
             <div>
-                <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.photo}/>
+               <NavLink to={'/profile/' + u.id}>
+ <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.photo} alt={'avatar'}/>
+               </NavLink>
     </div>
     <div>
     {u.followed

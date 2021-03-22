@@ -1,5 +1,5 @@
 import s from  './Header.module.css'
-import logo from '../common/assets/img/Ghost.gif'
+import logo from '../common/assets/img/klipartz.com.png'
 
 
 function Header (){

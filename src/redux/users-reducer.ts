@@ -69,23 +69,23 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
     }
 }
 
-export let followAC = (userId: number) => ({type: "FOLLOW", userId} as const)
-export let unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId} as const)
-export let setUsersAC = (users: Array<UsersType>) => ({type: "SET-USERS", users} as const)
-export let setCurrentPageAC = (currentPage: number) => ({type: "SET-CURRENT-PAGE", currentPage } as const)
-export let setTotalUsersCountAC = (totalUsersCount: number) => ({type: "SET-TOTAL-USERS-COUNT",count: totalUsersCount } as const)
-export let toggleIsFetchingAC = (isFetching: boolean) => ({type: "TOGGLE-IS-FETCHING",isFetching } as const)
+export let follow = (userId: number) => ({type: "FOLLOW", userId} as const)
+export let unfollow = (userId: number) => ({type: "UNFOLLOW", userId} as const)
+export let setUsers = (users: Array<UsersType>) => ({type: "SET-USERS", users} as const)
+export let setCurrentPage = (currentPage: number) => ({type: "SET-CURRENT-PAGE", currentPage } as const)
+export let setTotalUsersCount = (totalUsersCount: number) => ({type: "SET-TOTAL-USERS-COUNT",count: totalUsersCount } as const)
+export let toggleIsFetching = (isFetching: boolean) => ({type: "TOGGLE-IS-FETCHING",isFetching } as const)
 
 type ActionsType =
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof newTextChangeHandlerAC>
     | ReturnType<typeof newMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>
-    | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toggleIsFetching>
 
 export default usersReducer

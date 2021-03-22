@@ -47,8 +47,8 @@ export type ActionsType =
             posts: [
                 {id: 1, message: 'Кто ты?', countsLike: 4},
                 {id: 1, message: 'Зачем', countsLike: 54},
-
-            ]
+            ],
+            profile: null
         },
         dialogPage: {
             dialogs: [
@@ -176,6 +176,16 @@ type MessageType = {
 export type ProfilePageType = {
     newPostText: string
     posts: Array<PostType>
+    profile: null
+    // [
+    //     {userId: number
+    // lookingForAJob: boolean
+    // lookingForAJobDescription:string
+    // fullName: string
+    // contacts: object
+    // github: string
+    // vk: string}
+    // ]
 
 }
 
