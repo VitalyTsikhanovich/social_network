@@ -1,4 +1,3 @@
-import {addPostAC, newTextChangeHandlerAC} from "./profile-reducer";
 
 export type DialogType = {
     id: number
@@ -64,12 +63,10 @@ const dialogsReducer = (state: InitStateType = initialState, action: ActionsType
 
 }
 export let sendMessageAC = () => ({type: 'SEND-MESSAGE',} as const)
-
 export let newMessageBodyAC = (body: string) => ({type: 'NEW-MESSAGE-BODY', body: body} as const)
 
 type ActionsType =
-    | ReturnType<typeof addPostAC>
-    | ReturnType<typeof newTextChangeHandlerAC>
+
     | ReturnType<typeof newMessageBodyAC>
     | ReturnType<typeof sendMessageAC>
 

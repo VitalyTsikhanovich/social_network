@@ -3,20 +3,12 @@ import s from './Profile.module.css'
 import MyPosts, {PropsArray} from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {PropsType} from "./ProfileContainer";
 
 
-type ProfileType = {
-    // profilePage: ProfilePageType
-    // addPost: () => void
-    // changeUpdateText: (newText: string) => void
-    // dispatch: (action:ActionsType )=> void
-    // store: StoreType
-    // state: RootStateProps
-    profile: null
-}
 
 
-function Profile(props: ProfileType) {
+function Profile(props: PropsType) {
     return (
         <div className={s.content}>
             <ProfileInfo profile={props.profile} />

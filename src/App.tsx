@@ -1,18 +1,15 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css'
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Dialogs, {DialogsPropsType, MessagePropsType, Props} from "./components/Dialogs/Dialogs";
 import Music from "./components/Music/Music"
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Setting from "./components/Setting/Setting";
-import {ActionsType, RootStateProps, StoreType} from "./redux/store";
-import Sidebar from "./components/Sidebar/Sidebar";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type AppPropsType = {
     // posts: Array<PostsType>
@@ -32,7 +29,7 @@ function App(props: AppPropsType) {
         <div className="App">
             <BrowserRouter>
                 <div className='app-wrapper'>
-                    <Header/>
+                    <HeaderContainer/>
                     <Navbar/>
 
                     <div className={'app-wrapper-content'}>

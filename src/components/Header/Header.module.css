@@ -7,3 +7,11 @@
     width: 50px;
     border-radius: 20px;
 }
+
+.loginBlock{
+    float: right;
+}
+a{
+    color: white;
+    text-decoration: none;
+}

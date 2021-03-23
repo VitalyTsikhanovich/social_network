@@ -1,4 +1,3 @@
-import {newMessageBodyAC, sendMessageAC} from "./dialogs-reducer";
 
 export type PostType = {
     id: number
@@ -56,14 +55,11 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
 }
 
 export let addPostAC = () => ({type: "ADD-POST"} as const)
-
 export let newTextChangeHandlerAC = (value: string) => ({type: "CHANGE-NEW-TEXT", newText: value} as const)
 export let setUsersProfile = (profile: null) => ({type: "SET-USERS-PROFILE", profile} as const)
 type ActionsType =
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof newTextChangeHandlerAC>
-    | ReturnType<typeof newMessageBodyAC>
-    | ReturnType<typeof sendMessageAC>
     | ReturnType<typeof setUsersProfile>
 
 export default profileReducer

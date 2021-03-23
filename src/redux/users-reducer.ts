@@ -1,5 +1,3 @@
-import {newMessageBodyAC, sendMessageAC} from "./dialogs-reducer";
-import {addPostAC, newTextChangeHandlerAC} from "./profile-reducer";
 
 export type UsersType = {
     id: number
@@ -7,7 +5,10 @@ export type UsersType = {
     name: string
     status: string
     location: {sity: string, country: string}
-    photos: any
+    photos: {
+        small: string
+        large: string
+    }
     pageSize: number
     totalUsersCount: number
     isFetching: boolean
@@ -77,10 +78,6 @@ export let setTotalUsersCount = (totalUsersCount: number) => ({type: "SET-TOTAL-
 export let toggleIsFetching = (isFetching: boolean) => ({type: "TOGGLE-IS-FETCHING",isFetching } as const)
 
 type ActionsType =
-    | ReturnType<typeof addPostAC>
-    | ReturnType<typeof newTextChangeHandlerAC>
-    | ReturnType<typeof newMessageBodyAC>
-    | ReturnType<typeof sendMessageAC>
     | ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>

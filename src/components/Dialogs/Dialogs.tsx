@@ -1,8 +1,9 @@
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogPageType} from "../../redux/store";
+// import {DialogPageType} from "../../redux/store";
 import React, {ChangeEvent} from "react";
+import {InitStateType} from "../../redux/dialogs-reducer";
 
 
 export type DialogsPropsType = {
@@ -15,7 +16,7 @@ export type MessagePropsType = {
 }
 
 export type Props = {
-    dialogPage: DialogPageType
+    dialogPage: InitStateType
     onNewMessageChange: (body: string)=>void
     onSendMessageClick: ()=> void
 

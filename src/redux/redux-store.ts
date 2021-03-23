@@ -4,13 +4,15 @@ import dialogsReducer from './dialogs-reducer'
 
 import usersReducer from "./users-reducer";
 import profileReducer from "./profile-reducer";
+import authReducer from "./auth-reducer";
 
 // import sidebarReducer from "./sidebar-reducer";
 
 export let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogPage: dialogsReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
     // sidebar: sidebarReducer
 })
 
