@@ -4,7 +4,8 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {AuthType,  setAuthUserData} from "../../redux/auth-reducer";
-import {getUsers} from "../../api/api";
+import {userAPI} from "../../api/api";
+;
 
 export type MapDispatchType={
     setAuthUserData: (data:AuthType)=>void
@@ -20,7 +21,7 @@ export type UsersPropsType = MapStatePropsType & MapDispatchType
 
 class HeaderContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-        getUsers().then(data => {
+        userAPI.getUsers().then(data => {
 if (data.resultCode === 0){
 // let {id, email, login } = response.data.data
     this.props.setAuthUserData(data.data)    //!!! Деструктуризация

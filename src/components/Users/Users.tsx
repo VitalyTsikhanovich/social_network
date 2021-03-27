@@ -4,10 +4,12 @@ import userPhoto from "../common/assets/img/userPhoto.png";
 import {MapDispatchType, MapStatePropsType} from "./UsersContainer";
 import {NavLink} from 'react-router-dom';
 import axios from "axios";
+
+
+
 type UsersPropsType = MapStatePropsType & MapDispatchType & UsersAPITypeProps
 
 type UsersAPITypeProps={
-
     onPageChanged: (p: number)=>void
 }
 
@@ -35,9 +37,9 @@ let Users =(props: UsersPropsType)=>{
     </div>
     <div>
     {u.followed
-            ? <button onClick={() => {
-
-            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/{u.id}`, {
+            ? <button disabled={props.followingInProgress.some(id=> id==u.id)} onClick={() => {
+props.toggleFollowingProgress(true, u.id)
+            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                     withCredentials: true,
                     headers: {
                         "API-KEY": "45e88326-78f0-45ca-b953-491c7fd66778"
@@ -47,10 +49,12 @@ let Users =(props: UsersPropsType)=>{
                 if (response.data.resultCode == 0){
                     props.unfollow(u.id)
                 }
+                    props.toggleFollowingProgress(false, u.id)
             })
 
     }}> UnFollow</button>
-    : <button onClick={() => {
+    : <button disabled={props.followingInProgress.some(id=> id==u.id)} onClick={() => {
+            props.toggleFollowingProgress(true, u.id)
             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {
                 withCredentials: true,
                 headers: {
@@ -61,6 +65,7 @@ let Users =(props: UsersPropsType)=>{
            if (response.data.resultCode == 0){
                props.follow(u.id)
            }
+                props.toggleFollowingProgress(false, u.id)
             })
 
 
