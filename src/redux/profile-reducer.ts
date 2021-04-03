@@ -1,3 +1,5 @@
+import {Dispatch} from "redux";
+import {userAPI} from "../api/api";
 
 export type PostType = {
     id: number
@@ -57,6 +59,12 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
 export let addPostAC = () => ({type: "ADD-POST"} as const)
 export let newTextChangeHandlerAC = (value: string) => ({type: "CHANGE-NEW-TEXT", newText: value} as const)
 export let setUsersProfile = (profile: null) => ({type: "SET-USERS-PROFILE", profile} as const)
+
+export let getUsersProfile = (userId: string) => (dispatch: Dispatch)=>{
+    userAPI.getProfile(userId).then(response => {
+      dispatch(setUsersProfile(response.data))
+    })
+}
 type ActionsType =
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof newTextChangeHandlerAC>

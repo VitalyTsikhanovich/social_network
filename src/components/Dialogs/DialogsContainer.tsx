@@ -59,6 +59,7 @@ export type DialogPropType = MapStatePropsType | MapDispatchType
 
 type  MapStatePropsType={
     dialogPage: InitStateType
+    isAuth: boolean
 }
 type MapDispatchType= {
     onSendMessageClick: ()=>void
@@ -67,7 +68,8 @@ type MapDispatchType= {
 
 let mapStateToProps = (state: AppStateType) :MapStatePropsType=> {
     return {
-        dialogPage: state.dialogPage
+        dialogPage: state.dialogPage,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {

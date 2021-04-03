@@ -4,7 +4,7 @@ import Message from "./Message/Message";
 // import {DialogPageType} from "../../redux/store";
 import React, {ChangeEvent} from "react";
 import {InitStateType} from "../../redux/dialogs-reducer";
-
+import {Redirect} from "react-router-dom";
 
 export type DialogsPropsType = {
     name: string
@@ -17,9 +17,9 @@ export type MessagePropsType = {
 
 export type Props = {
     dialogPage: InitStateType
-    onNewMessageChange: (body: string)=>void
-    onSendMessageClick: ()=> void
-
+    onNewMessageChange: (body: string) => void
+    onSendMessageClick: () => void
+    isAuth: boolean
 }
 
 
@@ -38,6 +38,7 @@ function Dialogs(props: Props) {
         props.onNewMessageChange(body)
         // props.dispatch(newMessageBodyAC(body))
     }
+    if (!props.isAuth) return <Redirect to={"/login"}/>      //(props.isAuth === false
 
     return (
         <div className={s.dialogs}>

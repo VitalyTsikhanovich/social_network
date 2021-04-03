@@ -11,8 +11,8 @@ function Header(props: UsersPropsType) {
             <div className={s.loginBlock}>
                 {props.isAuth ? props.login
                 :<NavLink to={'/login'}>Login </NavLink>}
-                {props.isAuth ? props.email
-                :<NavLink to={'/login'}>Email </NavLink>}
+                {/*{props.isAuth ? props.email*/}
+                {/*:<NavLink to={'/login'}>Email </NavLink>}*/}
 
             </div>
         </header>
