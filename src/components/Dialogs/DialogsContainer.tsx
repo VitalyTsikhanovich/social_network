@@ -1,20 +1,20 @@
-
 import React from "react";
 import {InitStateType, newMessageBodyAC, sendMessageAC} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
+import {Dispatch, compose} from "redux";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 
-export type DialogsPropsType = {
-    name: string
-    id: number
-}
+// export type DialogsPropsType = {
+//     name: string
+//     id: number
+// }
 
-export type MessagePropsType = {
-    message: string
-}
+// export type MessagePropsType = {
+//     message: string
+// }
 
 export type ContainerProps = {
     // dialogs: Array<DialogsPropsType>
@@ -57,33 +57,40 @@ export type DialogPropType = MapStatePropsType | MapDispatchType
 //     )
 // }
 
-type  MapStatePropsType={
+type  MapStatePropsType = {
     dialogPage: InitStateType
-    isAuth: boolean
+    // isAuth: boolean
 }
-type MapDispatchType= {
-    onSendMessageClick: ()=>void
-    onNewMessageChange: (body: string)=> void
+type MapDispatchType = {
+    onSendMessageClick: () => void
+    onNewMessageChange: (body: string) => void
 }
 
-let mapStateToProps = (state: AppStateType) :MapStatePropsType=> {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         dialogPage: state.dialogPage,
-        isAuth: state.auth.isAuth
+        // isAuth: state.auth.isAuth    //??
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
     return {
-        onSendMessageClick:()=> {
+        onSendMessageClick: () => {
             dispatch(sendMessageAC())
         },
-        onNewMessageChange:(body: string)=> {
+        onNewMessageChange: (body: string) => {
             dispatch(newMessageBodyAC(body))
         }
     }
 }
+// compose(
+//     connect(mapStateToProps, mapDispatchToProps),
+//     WithAuthRedirect
+// )(Dialogs)
 
-export let SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
+// export let SuperDialogsContainer = WithAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Dialogs))
 
-export default SuperDialogsContainer
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect
+)(Dialogs)

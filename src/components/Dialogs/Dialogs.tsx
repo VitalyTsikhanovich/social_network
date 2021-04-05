@@ -1,7 +1,6 @@
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-// import {DialogPageType} from "../../redux/store";
 import React, {ChangeEvent} from "react";
 import {InitStateType} from "../../redux/dialogs-reducer";
 import {Redirect} from "react-router-dom";
@@ -38,7 +37,7 @@ function Dialogs(props: Props) {
         props.onNewMessageChange(body)
         // props.dispatch(newMessageBodyAC(body))
     }
-    if (!props.isAuth) return <Redirect to={"/login"}/>      //(props.isAuth === false
+    // if (!props.isAuth) return <Redirect to={"/login"}/>      //(props.isAuth === false
 
     return (
         <div className={s.dialogs}>
