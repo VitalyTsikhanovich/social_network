@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {userAPI} from "../api/api";
+import {profileApi, userAPI} from "../api/api";
 
 export type PostType = {
     id: number
@@ -14,7 +14,8 @@ export const initialState = {
         {id: 1, message: 'Зачем', countsLike: 54},
 
     ] as Array<PostType>,
-    profile: null
+    profile: null,
+    status: ""
 }
 export type InitialStateType = typeof initialState
 
@@ -45,6 +46,12 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
                 newPostText: action.newText
             }
         }
+        case "SET-STATUS":{
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         case "SET-USERS-PROFILE": {
             return {...state, profile: action.profile}
         }
@@ -59,8 +66,23 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
 export let addPostAC = () => ({type: "ADD-POST"} as const)
 export let newTextChangeHandlerAC = (value: string) => ({type: "CHANGE-NEW-TEXT", newText: value} as const)
 export let setUsersProfile = (profile: null) => ({type: "SET-USERS-PROFILE", profile} as const)
+export let setStatus = (status: string) => ({type: "SET-STATUS", status} as const)
 
-export let getUsersProfile = (userId: string) => (dispatch: Dispatch)=>{
+export let getStatus = (userId: string) =>(dispatch: Dispatch) =>{
+    profileApi.getStatus(userId).then(response =>{
+        dispatch(setStatus(response.data))
+    })
+}
+export let updateStatus = (status: string) =>(dispatch: Dispatch) =>{
+    profileApi.updateStatus(status).then(response =>{
+        if (response.data.resultCode === 0){
+            dispatch(setStatus(status))
+        }
+    })
+}
+
+
+export let getUsersProfile = (userId: string) => (dispatch: Dispatch)=>{       //санка
     userAPI.getProfile(userId).then(response => {
       dispatch(setUsersProfile(response.data))
     })
@@ -69,5 +91,6 @@ type ActionsType =
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof newTextChangeHandlerAC>
     | ReturnType<typeof setUsersProfile>
+    | ReturnType<typeof setStatus>
 
 export default profileReducer

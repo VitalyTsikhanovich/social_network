@@ -1,10 +1,12 @@
 import s from "./ProfileInfo.module.css"
 import React from "react";
 import Preloader from "../../common/Preloader/ Preloader";
-import liga from '../../common/assets/img/photo_2021-03-22_16-31-25.jpg'
-
+import league from '../../common/assets/img/photo_2021-03-22_16-31-25.jpg'
+import ProfileStatus from './ProfileStatus'
 type ProfileInfoProps={
     profile: any
+    status: string
+    updateStatus: string
 }
 
 function ProfileInfo(props: ProfileInfoProps) {
@@ -13,17 +15,17 @@ if (!props.profile){
 }
     return (
         <div >
-            <div className={s.discrip}>
-                <img src={liga}
-                    alt=""/>
-            </div>
+            {/*<div className={s.discrip}>*/}
+            {/*    <img src={league}*/}
+            {/*        alt=""/>*/}
+            {/*</div>*/}
 
             <div className={s.cont}>
-                <img  src={props.profile.photos.large} alt={'red'}/>
+                <img  src={props.profile.photos.large} alt={'user photo'}/>
                 </div>
 
                 <div>
-                    <p>{props.profile.userId}</p>
+                    {/*<p>{props.profile.userId}</p>*/}
                     <p>Имя: {props.profile.fullName}</p>
                 </div>
             <div>
@@ -31,10 +33,12 @@ if (!props.profile){
             </div>
             <div>
                 <p>{props.profile.contacts.vk}</p>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
-                main content
-            </div>
-
+            {/*<div>*/}
+            {/*    main content*/}
+            {/*</div>*/}
+        </div>
     )
 }
 
