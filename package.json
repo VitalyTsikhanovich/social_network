@@ -23,6 +23,7 @@
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "typescript": "^4.0.3",
     "typescript-fsa-redux-thunk": "^2.10.1",
     "web-vitals": "^0.2.4"
