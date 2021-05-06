@@ -1,5 +1,5 @@
-import React, {ChangeEvent} from "react";
-import {addPostAC,  newTextChangeHandlerAC, PostType} from "../../../redux/profile-reducer";
+import React from "react";
+import {addPostAC,  PostType} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
@@ -60,8 +60,8 @@ type  MapStatePropsType={
     newPostText: string
 }
 type MapDispatchType= {
-    addPost: ()=>void
-    changeUpdateText: (text: string) =>void
+    addPost: (newPostText: string)=>void
+    // changeUpdateText: (text: string) =>void
 }
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType=> {
@@ -72,12 +72,12 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType=> {
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
     return {
-        addPost:()=> {
-            dispatch(addPostAC())
-        },
-        changeUpdateText: (text)=>{
-            dispatch(newTextChangeHandlerAC(text))
-        }
+        addPost:(newPostText: string)=> {
+            dispatch(addPostAC(newPostText))
+         },
+        // changeUpdateText: (text)=>{
+        //     dispatch(newTextChangeHandlerAC(text))
+        // }
     }
 }
 

@@ -1,5 +1,5 @@
-import {newMessageBodyAC, sendMessageAC} from "./dialogs-reducer";
-import {addPostAC, newTextChangeHandlerAC} from "./profile-reducer";
+import { sendMessageAC} from "./dialogs-reducer";
+import {addPostAC} from "./profile-reducer";
 
 
 const initialState = {}
@@ -22,6 +22,4 @@ export default sidebarReducer
 
 type ActionsType =
     | ReturnType<typeof addPostAC>
-    | ReturnType<typeof newTextChangeHandlerAC>
-    | ReturnType<typeof newMessageBodyAC>
     | ReturnType<typeof sendMessageAC>

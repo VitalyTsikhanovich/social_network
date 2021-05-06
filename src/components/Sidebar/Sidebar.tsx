@@ -6,7 +6,8 @@ function Sidebar() {
 
     return (
         <div>
-            friends
+
+            {}
         </div>
     )
 

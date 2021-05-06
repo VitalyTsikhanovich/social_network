@@ -1,7 +1,6 @@
 import s from "./ProfileInfo.module.css"
 import React from "react";
 import Preloader from "../../common/Preloader/ Preloader";
-import league from '../../common/assets/img/photo_2021-03-22_16-31-25.jpg'
 import ProfileStatus from './ProfileStatus'
 type ProfileInfoProps={
     profile: any

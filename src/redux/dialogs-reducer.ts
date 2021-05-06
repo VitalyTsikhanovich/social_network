@@ -21,8 +21,7 @@ const initialState = {
         {id: 1, message: 'Привет'},
         {id: 1, message: 'Y'},
         {id: 1, message: 'Как дела'}
-    ] as Array<MessageType>,
-    newMessageBody: ''
+    ] as Array<MessageType>
 }
 
 export type InitStateType = typeof initialState
@@ -30,22 +29,22 @@ export type InitStateType = typeof initialState
 const dialogsReducer = (state: InitStateType = initialState, action: ActionsType): InitStateType => {
     // let stateCopy
     switch (action.type) {
-        case 'NEW-MESSAGE-BODY':
-       return    {
-                ...state,
-                newMessageBody: action.body
-            }
+        // case 'NEW-MESSAGE-BODY':
+       // return    {
+                // ...state,
+                // newMessageBody: action.body
+            // }
             // stateCopy.newMessageBody = action.body
             // state.newMessageBody = action.body
             // return stateCopy
                                                    // break
         case 'SEND-MESSAGE':
 
-            let body = state.newMessageBody
+            let body = action.newMessageBody
             // stateCopy=
            return      {
                 ...state,
-                newMessageBody : '',
+
                 messages: [...state.messages, {id: 6, message: body}]                 //вместо push
             }
 
@@ -62,13 +61,10 @@ const dialogsReducer = (state: InitStateType = initialState, action: ActionsType
 
 
 }
-export let sendMessageAC = () => ({type: 'SEND-MESSAGE',} as const)
-export let newMessageBodyAC = (body: string) => ({type: 'NEW-MESSAGE-BODY', body: body} as const)
+export let sendMessageAC = (newMessageBody: string) => ({type: 'SEND-MESSAGE',newMessageBody} as const)
+// export let newMessageBodyAC = (body: string) => ({type: 'NEW-MESSAGE-BODY', body: body} as const)
 
-type ActionsType =
-
-    | ReturnType<typeof newMessageBodyAC>
-    | ReturnType<typeof sendMessageAC>
+type ActionsType = ReturnType<typeof sendMessageAC>
 
 
 export default dialogsReducer

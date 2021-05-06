@@ -1,5 +1,5 @@
 import React from "react";
-import {InitStateType, newMessageBodyAC, sendMessageAC} from "../../redux/dialogs-reducer";
+import {InitStateType, sendMessageAC} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
@@ -62,8 +62,8 @@ type  MapStatePropsType = {
     // isAuth: boolean
 }
 type MapDispatchType = {
-    onSendMessageClick: () => void
-    onNewMessageChange: (body: string) => void
+    onSendMessageClick: (newMessageBody: string) => void
+    // onNewMessageChange: (body: string) => void
 }
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
@@ -74,11 +74,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
     return {
-        onSendMessageClick: () => {
-            dispatch(sendMessageAC())
-        },
-        onNewMessageChange: (body: string) => {
-            dispatch(newMessageBodyAC(body))
+        onSendMessageClick: (newMessageBody: string) => {
+            dispatch(sendMessageAC(newMessageBody))
         }
     }
 }
@@ -92,5 +89,5 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
-    WithAuthRedirect
+    // WithAuthRedirect
 )(Dialogs)

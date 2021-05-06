@@ -132,5 +132,5 @@ export default compose<React.ComponentType>(
             setCurrentPage,
             toggleFollowingProgress,
             getUsers: getUsersThunkCreator}),
-WithAuthRedirect
+// WithAuthRedirect
 )(UsersContainer)

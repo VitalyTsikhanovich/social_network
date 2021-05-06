@@ -43,7 +43,7 @@ function App(props: AppPropsType) {
                             <Route path='/news' render={() => <News/>}/>
                             <Route path='/setting' render={() => <Setting/>}/>
                             <Route path='/users' render={() => <UsersContainer/>}/>
-                            <Route path='/login' render={() => <Login/>}/>
+                            <Route path='/login' render={() => <Login />}/>
                         </Switch>
                     </div>
                 </div>

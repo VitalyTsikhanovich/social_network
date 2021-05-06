@@ -8,14 +8,14 @@ export type PostType = {
 }
 
 export const initialState = {
-    newPostText: "Hi ",
     posts: [
         {id: 1, message: 'Кто ты?', countsLike: 4},
         {id: 1, message: 'Зачем', countsLike: 54},
 
     ] as Array<PostType>,
     profile: null,
-    status: ""
+    status: "",
+    newPostText: ""
 }
 export type InitialStateType = typeof initialState
 
@@ -25,13 +25,12 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
         case 'ADD-POST':
             const newPost: PostType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.newPostText,
                 countsLike: 0
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ''
             }
 // let stateCopy = {...state}
 // stateCopy.posts = [...state.posts]
@@ -40,12 +39,12 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
         // state.posts.push(newPost)
         // state.newPostText = ''
         // return stateCopy
-        case 'CHANGE-NEW-TEXT': {
-            return {
-                ...state,
-                newPostText: action.newText
-            }
-        }
+        // case 'CHANGE-NEW-TEXT': {
+        //     return {
+        //         ...state,
+        //         newPostText: action.newText
+        //     }
+        // }
         case "SET-STATUS":{
             return {
                 ...state,
@@ -63,8 +62,8 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
 
 }
 
-export let addPostAC = () => ({type: "ADD-POST"} as const)
-export let newTextChangeHandlerAC = (value: string) => ({type: "CHANGE-NEW-TEXT", newText: value} as const)
+export let addPostAC = (newPostText: string ) => ({type: "ADD-POST", newPostText} as const)
+// export let newTextChangeHandlerAC = (value: string) => ({type: "CHANGE-NEW-TEXT", newText: value} as const)
 export let setUsersProfile = (profile: null) => ({type: "SET-USERS-PROFILE", profile} as const)
 export let setStatus = (status: string) => ({type: "SET-STATUS", status} as const)
 
@@ -89,7 +88,7 @@ export let getUsersProfile = (userId: string) => (dispatch: Dispatch)=>{       /
 }
 type ActionsType =
     | ReturnType<typeof addPostAC>
-    | ReturnType<typeof newTextChangeHandlerAC>
+    // | ReturnType<typeof newTextChangeHandlerAC>
     | ReturnType<typeof setUsersProfile>
     | ReturnType<typeof setStatus>
 
