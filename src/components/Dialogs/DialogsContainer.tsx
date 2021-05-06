@@ -89,5 +89,5 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchType => {
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
-    // WithAuthRedirect
+    WithAuthRedirect
 )(Dialogs)

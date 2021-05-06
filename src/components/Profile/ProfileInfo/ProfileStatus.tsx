@@ -7,7 +7,6 @@ class ProfileStatus extends React.Component<any> {
     statusInputRef = React.createRef()
     state = {
         editMode: false,
-        // status: 'redddd'
         status: this.props.status
 
     }

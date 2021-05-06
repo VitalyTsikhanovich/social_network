@@ -11,6 +11,11 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import {connect} from "react-redux";
+import {getAuthUserData} from "./redux/auth-reducer";
+import {initializeApp} from "./redux/app-reducer";
+import {AppStateType} from "./redux/redux-store";
+import Preloader from "./components/common/Preloader/ Preloader";
 
 type AppPropsType = {
     // posts: Array<PostsType>
@@ -21,35 +26,53 @@ type AppPropsType = {
     // state: RootStateProps
     // addPost: () => void
     // dispatch: (action: ActionsType) => void
+    initializeApp: ()=> void
 }
 
-function App(props: AppPropsType) {
-    // const state = props.store.getState()
+class App extends React.Component<AppPropsType> {
+    componentDidMount() {
+        this.props.initializeApp()
+    }
 
-    return (
-        <div className="App">
-            <BrowserRouter>
-                <div className='app-wrapper'>
-                    <HeaderContainer/>
-                    <Navbar/>
+    render() {
+        // const state = props.store.getState()
+        if (! this.props.initializeApp) {
+            return <Preloader/>
+        }
+        return (
+            <div className="App">
+                <BrowserRouter>
+                    <div className='app-wrapper'>
+                        <HeaderContainer getAuthUserData={getAuthUserData}/>
+                        <Navbar/>
 
-                    <div className={'app-wrapper-content'}>
-                        <Switch>
-                            <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                        <div className={'app-wrapper-content'}>
+                            <Switch>
+                                <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
 
-                            <Route path='/dialogs' render={() => <DialogsContainer />}/>
+                                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
 
-                            <Route path='/music' render={() => <Music/>}/>
-                            <Route path='/news' render={() => <News/>}/>
-                            <Route path='/setting' render={() => <Setting/>}/>
-                            <Route path='/users' render={() => <UsersContainer/>}/>
-                            <Route path='/login' render={() => <Login />}/>
-                        </Switch>
+                                <Route path='/music' render={() => <Music/>}/>
+                                <Route path='/news' render={() => <News/>}/>
+                                <Route path='/setting' render={() => <Setting/>}/>
+                                <Route path='/users' render={() => <UsersContainer/>}/>
+                                <Route path='/login' render={() => <Login/>}/>
+                            </Switch>
+                        </div>
                     </div>
-                </div>
-            </BrowserRouter>
-        </div>
-    );
+                </BrowserRouter>
+            </div>
+        );
+    }
 }
 
-export default App;
+type  MapStatePropsType = {
+    initialized: boolean
+}
+
+
+let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+    initialized: state.app.initialized
+})
+
+export default connect(mapStateToProps, {initializeApp})(App)

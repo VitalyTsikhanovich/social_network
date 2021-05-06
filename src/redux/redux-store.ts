@@ -5,6 +5,7 @@ import usersReducer from "./users-reducer";
 import profileReducer from "./profile-reducer";
 import authReducer from "./auth-reducer";
 import { reducer as formReducer} from 'redux-form'
+import appReducer from "./app-reducer";
 
 // import sidebarReducer from "./sidebar-reducer";
 
@@ -13,7 +14,8 @@ export let rootReducer = combineReducers({
     dialogPage: dialogsReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
     // sidebar: sidebarReducer
 })
 
