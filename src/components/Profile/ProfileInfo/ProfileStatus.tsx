@@ -1,6 +1,4 @@
 import React, {ChangeEvent} from "react";
-import Preloader from "../../common/Preloader/ Preloader";
-import {setStatus} from "../../../redux/profile-reducer";
 
 
 class ProfileStatus extends React.Component<any> {
