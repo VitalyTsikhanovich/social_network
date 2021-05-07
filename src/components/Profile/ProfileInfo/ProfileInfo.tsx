@@ -2,6 +2,7 @@ import s from "./ProfileInfo.module.css"
 import React from "react";
 import Preloader from "../../common/Preloader/ Preloader";
 import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 type ProfileInfoProps={
     profile: any
     status: string
@@ -32,7 +33,7 @@ if (!props.profile){
             </div>
             <div>
                 <p>{props.profile.contacts.vk}</p>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
             {/*<div>*/}
             {/*    main content*/}
