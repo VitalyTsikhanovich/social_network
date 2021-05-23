@@ -20,9 +20,11 @@ export type PropsArray = {
 
     addPost:(newPostText: string)=> void;
 }
+// shouldComponentUpdate(nextProps: Readonly<PropsArray>, nextState: Readonly<{}>, nextContext: any): boolean {
+//     return  nextProps != this.props || nextState != this.state
+// }
 
-
-function MyPosts(props: PropsArray) {
+const MyPosts= React.memo((props:PropsArray)=> {
 
     let postsElement = props.posts.map(p => <Post message={p.message} countsLike={p.countsLike}/>)
     // let newPostElement = React.createRef<HTMLTextAreaElement>()
@@ -57,7 +59,7 @@ function MyPosts(props: PropsArray) {
             </div>
         </div>
     )
-}
+})
 
 let maxLength = maxLengthCreator(6)
 
