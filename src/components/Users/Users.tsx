@@ -7,7 +7,7 @@ import {NavLink} from 'react-router-dom';
 
 type UsersPropsType = MapStatePropsType & MapDispatchType & UsersAPITypeProps
 
-type UsersAPITypeProps={
+export type UsersAPITypeProps={
     onPageChanged: (p: number)=>void
 }
 
@@ -17,6 +17,8 @@ let Users =(props: UsersPropsType)=>{
     for (let i = 1; i<=pagesCount; i++){
         pages.push(i)
     }
+
+
 
     return <div>
             <div>
@@ -40,7 +42,7 @@ props.unfollow(u.id)
 
     }}> UnFollow</button>
     : <button disabled={props.followingInProgress.some(id=> id===u.id)} onClick={() => {
-		 
+
       props.follow(u.id)
 
 
