@@ -3,7 +3,7 @@ import React from "react";
 import './App.css'
 import Navbar from "./components/Navbar/Navbar";
 import Music from "./components/Music/Music"
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import { Switch, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Setting from "./components/Setting/Setting";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -41,7 +41,6 @@ class App extends React.Component<AppPropsType> {
         }
         return (
             <div className="App">
-                <BrowserRouter>
                     <div className='app-wrapper'>
                         <HeaderContainer getAuthUserData={getAuthUserData}/>
                         <Navbar/>
@@ -49,9 +48,7 @@ class App extends React.Component<AppPropsType> {
                         <div className={'app-wrapper-content'}>
                             <Switch>
                                 <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-
                                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-
                                 <Route path='/music' render={() => <Music/>}/>
                                 <Route path='/news' render={() => <News/>}/>
                                 <Route path='/setting' render={() => <Setting/>}/>
@@ -60,7 +57,6 @@ class App extends React.Component<AppPropsType> {
                             </Switch>
                         </div>
                     </div>
-                </BrowserRouter>
             </div>
         );
     }
