@@ -4,27 +4,34 @@ import userPhoto from "../common/assets/img/userPhoto.png";
 import React from "react";
 import {UsersType} from "../../redux/users-reducer";
 
+type UserPropsType = {
+    user: UsersType
+    followingInProgress: Array<Number>
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
 
-let User = (users: UsersType, followingInProgress:  Array<Number> ,follow: (userId: number) => void, unfollow: (userId: number) => void) => {
+
+let User = ({user, followingInProgress, unfollow, follow, ...props}: UserPropsType) => {
 
     return (
         <div>
 
         <span>
             <div>
-               <NavLink to={'/profile/' + users.id}>
- <img src={users.photos.small != null ? users.photos.small : userPhoto} className={style.photo} alt={'avatar'}/>
+               <NavLink to={'/profile/' + user.id}>
+ <img src={user.photos.small != null ? user.photos.small : userPhoto} className={style.photo} alt={'avatar'}/>
                </NavLink>
     </div>
     <div>
-    {users.followed
-        ? <button disabled={followingInProgress.some(id => id === users.id)} onClick={() => {
-            unfollow(users.id)
+    {user.followed
+        ? <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+            unfollow(user.id)
 
         }}> UnFollow</button>
-        : <button disabled={followingInProgress.some(id => id === users.id)} onClick={() => {
+        : <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
 
-            follow(users.id)
+            follow(user.id)
 
 
         }}> Follow</button>}
@@ -35,9 +42,9 @@ let User = (users: UsersType, followingInProgress:  Array<Number> ,follow: (user
             <span>
     <span>
         <div>
-            {users.name}
+            {user.name}
     </div>
-    <div> {users.status}</div>
+    <div> {user.status}</div>
     </span>
     <span>
     <div> {'u.location.country'}</div>

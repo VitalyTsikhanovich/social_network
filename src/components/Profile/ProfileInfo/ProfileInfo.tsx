@@ -1,43 +1,35 @@
 import s from "./ProfileInfo.module.css"
 import React from "react";
 import Preloader from "../../common/Preloader/ Preloader";
-import ProfileStatus from './ProfileStatus'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-type ProfileInfoProps={
+
+type ProfileInfoProps = {
     profile: any
     status: string
     updateStatus: string
 }
 
-function ProfileInfo(props: ProfileInfoProps) {
-if (!props.profile){
-    return <Preloader/>
-}
+function ProfileInfo({profile, status, updateStatus}: ProfileInfoProps) {
+    if (!profile) {
+        return <Preloader/>
+    }
     return (
-        <div >
-            {/*<div className={s.discrip}>*/}
-            {/*    <img src={league}*/}
-            {/*        alt=""/>*/}
-            {/*</div>*/}
-
+        <div>
             <div className={s.cont}>
-                <img  src={props.profile.photos.large} alt={'user photo'}/>
-                </div>
+                <img src={profile.photos.large} alt={'user photo'}/>
+            </div>
 
-                <div>
-                    {/*<p>{props.profile.userId}</p>*/}
-                    <p>Имя: {props.profile.fullName}</p>
-                </div>
             <div>
-                <p>{props.profile.lookingForAJobDescription}</p>
+                <p>Имя: {profile.fullName}</p>
             </div>
             <div>
-                <p>{props.profile.contacts.vk}</p>
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                <p>{profile.lookingForAJobDescription}</p>
             </div>
-            {/*<div>*/}
-            {/*    main content*/}
-            {/*</div>*/}
+            <div>
+                <p>{profile.contacts.vk}</p>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+            </div>
+
         </div>
     )
 }

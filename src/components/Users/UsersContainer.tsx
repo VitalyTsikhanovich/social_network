@@ -13,7 +13,7 @@ import {compose} from "redux";
 import {
     getCurrentPage,
     getFollowingInProgress,
-    getIsFetching, getPageSize,
+    getIsFetching, getPageSize, getPortionSize,
     getTotalUsersCount, getUsers,
 
 } from "../../redux/users-selectors";
@@ -50,13 +50,14 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 
     componentDidMount() {
-
-        this.props.getUsers(this.props.pageSize, this.props.currentPage)
+let {pageSize, currentPage} = this.props
+        this.props.getUsers(pageSize, currentPage)
 
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        let {pageSize} = this.props
+        this.props.getUsers(pageNumber, pageSize)
         // this.props.setCurrentPage(pageNumber)
         // this.props.toggleIsFetching(true)
         // userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
@@ -78,7 +79,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    onPageChanged={this.onPageChanged} isFetching={this.props.isFetching}
                    followingInProgress={this.props.followingInProgress}
                    toggleFollowingProgress={this.props.toggleFollowingProgress}
-                   getUsers={this.props.getUsers}
+                   getUsers={this.props.getUsers} portionSize={this.props.portionSize}
 
             />
         </>
@@ -94,7 +95,8 @@ export let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
+        followingInProgress: getFollowingInProgress(state),
+        portionSize: getPortionSize(state)
     }
 }
 

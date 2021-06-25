@@ -16,17 +16,18 @@ export type UsersType = {
     pageSize: number
     totalUsersCount: number
     isFetching: boolean
+    portionSize: number
 
 }
 
 export const initialState = {
     users: [] as Array<UsersType>,
-    pageSize: 5,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [] as Array<Number>
-
+    followingInProgress: [] as Array<Number>,
+    portionSize: 15
 }
 
 
