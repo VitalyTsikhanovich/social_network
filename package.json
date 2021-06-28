@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "homepage": "https://vitalytsikhanovich.github.io/social_network/",
+  "homepage": "https://vitalytsikhanovich.github.io/social_network",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
