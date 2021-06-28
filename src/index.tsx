@@ -6,18 +6,18 @@ import App from "./App";
 
 import store from "./redux/redux-store";
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
-
+import {HashRouter} from "react-router-dom";
 
 
 const renderTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-            </BrowserRouter>
+            {/*<BrowserRouter basename={process.env.PUBLIC_URL}>*/}
+            <HashRouter>
+                <Provider store={store}>
+                    <App/>
+                </Provider>
+            </HashRouter>
             {/*<App state={store.getState()} addPost={store.addPost} changeNewText={store.changeNewText}/>*/}
         </React.StrictMode>,
         document.getElementById('root')

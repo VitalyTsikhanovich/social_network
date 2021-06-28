@@ -2,7 +2,7 @@ import s from "./ProfileInfo.module.css"
 import React from "react";
 import Preloader from "../../common/Preloader/ Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-
+import userPhoto from "../../common/assets/img/userPhoto.png";
 type ProfileInfoProps = {
     profile: any
     status: string
@@ -16,7 +16,7 @@ function ProfileInfo({profile, status, updateStatus}: ProfileInfoProps) {
     return (
         <div>
             <div className={s.cont}>
-                <img src={profile.photos.large} alt={'user photo'}/>
+                <img src={profile.photos.large || userPhoto} alt={'user photo'}/>
             </div>
 
             <div>
